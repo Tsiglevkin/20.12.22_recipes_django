@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 DATA = {
@@ -28,3 +29,13 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+
+def get_omlet(reqeust):
+    """"""
+    how_many = int(reqeust.GET.get('servings', 1))
+    context = {'recipe': DATA['omlet']}
+    for ingr, quan in context['recipe'].items():
+        context['recipe'][ingr] = quan * how_many
+
+    return render(reqeust, 'calculator/index.html', context=context)
