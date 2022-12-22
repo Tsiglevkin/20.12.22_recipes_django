@@ -39,3 +39,26 @@ def get_omlet(reqeust):
         context['recipe'][ingr] = quan * how_many
 
     return render(reqeust, 'calculator/index.html', context=context)
+
+
+def get_pasta(reqeust):
+    """"""
+    how_many = int(reqeust.GET.get('servings', 1))
+    context = {'recipe': DATA['pasta']}
+    for ingr, quan in context['recipe'].items():
+        context['recipe'][ingr] = quan * how_many
+
+    return render(reqeust, 'calculator/index.html', context=context)
+
+
+def get_buter(reqeust):
+    """"""
+    how_many = int(reqeust.GET.get('servings', 1))
+    context = {'recipe': DATA['buter']}
+    for ingr, quan in context['recipe'].items():
+        context['recipe'][ingr] = quan * how_many
+
+    return render(reqeust, 'calculator/index.html', context=context)
+
+
+
