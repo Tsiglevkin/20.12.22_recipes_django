@@ -31,34 +31,57 @@ DATA = {
 # }
 
 
-def get_omlet(reqeust):
-    """"""
+def get_dish(reqeust, dish):
+    """
+    Функция запрашивает название блюда,
+    возвращает render для шаблона с расчетом ингредиентов для нужного количества людей.
+    """
+
     how_many = int(reqeust.GET.get('servings', 1))
-    context = {'recipe': DATA['omlet']}
+    context = {'recipe': DATA[dish]}
     for ingr, quan in context['recipe'].items():
         context['recipe'][ingr] = quan * how_many
 
     return render(reqeust, 'calculator/index.html', context=context)
 
 
-def get_pasta(reqeust):
-    """"""
-    how_many = int(reqeust.GET.get('servings', 1))
-    context = {'recipe': DATA['pasta']}
-    for ingr, quan in context['recipe'].items():
-        context['recipe'][ingr] = quan * how_many
+def choice_dish(request):
+    """Функия возвращает HttpTesponse c инструкцией по применению калькулятора блюд."""
 
-    return render(reqeust, 'calculator/index.html', context=context)
+    return HttpResponse(f'Внесите в путь название блюда из данного списка: {", ".join(DATA.keys())}.'
+                        f' Пример /название блюда/?servings=количество персон')
 
 
-def get_buter(reqeust):
-    """"""
-    how_many = int(reqeust.GET.get('servings', 1))
-    context = {'recipe': DATA['buter']}
-    for ingr, quan in context['recipe'].items():
-        context['recipe'][ingr] = quan * how_many
-
-    return render(reqeust, 'calculator/index.html', context=context)
+# первые функции, неоптимальный вариант
+#
+# def get_omlet(reqeust):
+#     """"""
+#     how_many = int(reqeust.GET.get('servings', 1))
+#     context = {'recipe': DATA['omlet']}
+#     for ingr, quan in context['recipe'].items():
+#         context['recipe'][ingr] = quan * how_many
+#
+#     return render(reqeust, 'calculator/index.html', context=context)
+#
+#
+# def get_pasta(reqeust):
+#     """"""
+#     how_many = int(reqeust.GET.get('servings', 1))
+#     context = {'recipe': DATA['pasta']}
+#     for ingr, quan in context['recipe'].items():
+#         context['recipe'][ingr] = quan * how_many
+#
+#     return render(reqeust, 'calculator/index.html', context=context)
+#
+#
+# def get_buter(reqeust):
+#     """"""
+#     how_many = int(reqeust.GET.get('servings', 1))
+#     context = {'recipe': DATA['buter']}
+#     for ingr, quan in context['recipe'].items():
+#         context['recipe'][ingr] = quan * how_many
+#
+#     return render(reqeust, 'calculator/index.html', context=context)
 
 
 
